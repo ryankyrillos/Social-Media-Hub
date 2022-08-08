@@ -11,13 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Google.Apis" Version="1.57.0" />
     <PackageReference Include="Google.Apis.Auth" Version="1.57.0" />
     <PackageReference Include="Google.Apis.YouTube.v3" Version="1.57.0.2735" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.5" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="TweetinviAPI" Version="5.0.4" />
   </ItemGroup>
 
@@ -26,12 +24,6 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-    <None Remove=".gitattributes" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\.angular\cache\angular-webpack\b8c72681a1ac0b9aa42fb5e1fba10e4ae6251b58" />
-    <Folder Include="ClientApp\.angular\cache\babel-webpack" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -5,6 +5,7 @@ using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
+using WebAPI_SocialMediaPosts;
 
 namespace WebAPI_SocialMediaPosts.Controllers
 {
@@ -13,15 +14,21 @@ namespace WebAPI_SocialMediaPosts.Controllers
     public class YouTubeController : Controller
     {
         private readonly IConfiguration config;
+        private ErrorMessage err = new ErrorMessage();
         public YouTubeController(IConfiguration configuration)
         {
             config = configuration;
+            err.error = "";
         }
 
-        [HttpPost]
+        [HttpPost(Name = "[Controller][Action]")]
         public async Task<ActionResult<string>> PostVideo(YouTube yt)
         {
-            UploadVideo.MainFunction(yt.video_path, yt.title, yt.description, config);
+            UploadVideo.MainFunction(yt.video_path, yt.title, yt.description, config, err);
+            if(err.error != "")
+            {
+                return Ok(err);
+            }
             return Ok();
         }
     }
@@ -30,7 +37,7 @@ namespace WebAPI_SocialMediaPosts.Controllers
 class UploadVideo
 {
     [STAThread]
-    public static void MainFunction(string? path, string? title, string? description, IConfiguration config)
+    public static void MainFunction(string? path, string? title, string? description, IConfiguration config, ErrorMessage err)
     {
         try
         {
@@ -41,6 +48,7 @@ class UploadVideo
             foreach (var e in ex.InnerExceptions)
             {
                 Console.WriteLine("Error: " + e.Message);
+                err.error = e.Message;
             }
         }
     }

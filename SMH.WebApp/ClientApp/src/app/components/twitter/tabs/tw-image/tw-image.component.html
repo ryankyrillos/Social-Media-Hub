@@ -1,0 +1,17 @@
+<div class="ml-5">
+    <p-toast position="top-right"></p-toast>
+    <h5 class="mt-5">Image</h5>
+    <div class="field grid">
+        <label class="col-12 mb-2 md:col-2 md:mb-0">Image Path *</label>
+        <div class="col-12 md:col-10">
+            <input pInputText [(ngModel)]="imagePath" type="text" style="width: 70%"/>
+        </div>
+    </div>
+    <div class="field grid">
+        <label class="col-12 mb-2 md:col-2 md:mb-0">Text</label>
+        <div class="col-12 md:col-10">
+            <textarea pInputTextarea [(ngModel)]="text" style="width: 70%; height: 150%"></textarea>
+        </div>
+    </div>
+    <button pButton type="button" label="Post" style="margin-top: 5rem; width: auto; margin-bottom: 1rem;" (click)="onPostClick()"></button>
+</div>

@@ -33,12 +33,11 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Social Media',
                 items: [
-                    {label: 'Facebook', icon: 'pi pi-fw pi-facebook', routerLink: ['/facebook']},
-                    {label: 'Instagram', icon: 'pi pi-fw pi-instagram', routerLink: ['/instagram']},
-                    {label: 'Whatsapp', icon: 'pi pi-fw pi-whatsapp', routerLink: ['/whatsapp']},
-                    {label: 'Twitter', icon: 'pi pi-fw pi-twitter', routerLink: ['/twitter']},
-                    {label: 'Youtube', icon: 'pi pi-fw pi-youtube', routerLink: ['/youtube'], class: 'rotated-icon'},
-                    {label: 'Tiktok', icon: 'tiktok', routerLink: ['/tiktok']},                    
+                    {label: 'Facebook', icon: 'pi pi-fw pi-facebook', routerLink: [localStorage.getItem("userAccessToken") !== "" && localStorage.getItem("userAccessToken") !== null ? '/facebook/text' : '/facebook']},
+                    {label: 'Instagram', icon: 'pi pi-fw pi-instagram', routerLink: [localStorage.getItem("igUserAccessToken") !== "" && localStorage.getItem("igUserAccessToken") !== null ? '/instagram/image' : '/instagram']},
+                    {label: 'WhatsApp', icon: 'pi pi-fw pi-whatsapp', routerLink: [localStorage.getItem("waAccessToken") !== "" && localStorage.getItem("waAccessToken") !== null ? '/whatsapp/template' : '/whatsapp']},
+                    {label: 'Twitter', icon: 'pi pi-fw pi-twitter', routerLink: [localStorage.getItem('twIsLoggedIn') === "true"  ? '/twitter/text' : '/twitter']},
+                    {label: 'YouTube', icon: 'pi pi-fw pi-youtube', routerLink: ['/youtube'], class: 'rotated-icon'},           
                 ]
             }      
         ];

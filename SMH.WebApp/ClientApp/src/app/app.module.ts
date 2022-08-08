@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -87,7 +86,7 @@ import { TreeModule } from 'primeng/tree';
 import { TreeSelectModule } from 'primeng/treeselect';
 import { TreeTableModule } from 'primeng/treetable';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
- 
+
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
 import { AppTopBarComponent } from './app.topbar.component';
@@ -102,7 +101,6 @@ import { WhatsappComponent } from './components/whatsapp/whatsapp.component';
 import { TwitterComponent } from './components/twitter/twitter.component';
 import { InstagramComponent } from './components/instagram/instagram.component';
 import { YoutubeComponent } from './components/youtube/youtube.component';
-import { TiktokComponent } from './components/tiktok/tiktok.component';
 
 import { CountryService } from './service/countryservice';
 import { CustomerService } from './service/customerservice';
@@ -114,10 +112,20 @@ import { ProductService } from './service/productservice';
 import { MenuService } from './service/app.menu.service';
 import { ConfigService } from './service/app.config.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LoginComponent } from './components/login/login.component';
 import { FbTextComponent } from './components/facebook/tabs/fb-text/fb-text.component';
 import { FbImageComponent } from './components/facebook/tabs/fb-image/fb-image.component';
 import { FbVideoComponent } from './components/facebook/tabs/fb-video/fb-video.component';
+import { SMH_API } from './api/SMH_API';
+import { IgImageComponent } from './components/instagram/tabs/ig-image/ig-image.component';
+import { IgVideoComponent } from './components/instagram/tabs/ig-video/ig-video.component';
+import { WaTemplateComponent } from './components/whatsapp/tabs/wa-template/wa-template.component';
+import { WaTextComponent } from './components/whatsapp/tabs/wa-text/wa-text.component';
+import { WaImageComponent } from './components/whatsapp/tabs/wa-image/wa-image.component';
+import { WaVideoComponent } from './components/whatsapp/tabs/wa-video/wa-video.component';
+import { WaStickerComponent } from './components/whatsapp/tabs/wa-sticker/wa-sticker.component';
+import { TwTextComponent } from './components/twitter/tabs/tw-text/tw-text.component';
+import { TwImageComponent } from './components/twitter/tabs/tw-image/tw-image.component';
+import { TwVideoComponent } from './components/twitter/tabs/tw-video/tw-video.component';
 
 @NgModule({
     imports: [
@@ -223,16 +231,23 @@ import { FbVideoComponent } from './components/facebook/tabs/fb-video/fb-video.c
         TwitterComponent,
         InstagramComponent,
         YoutubeComponent,
-        TiktokComponent,
-        LoginComponent,
         FbTextComponent,
         FbImageComponent,
         FbVideoComponent,
+        IgImageComponent,
+        IgVideoComponent,
+        WaTemplateComponent,
+        WaTextComponent,
+        WaImageComponent,
+        WaVideoComponent,
+        WaStickerComponent,
+        TwTextComponent,
+        TwImageComponent,
+        TwVideoComponent,
     ],
     providers: [
-        {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, ConfigService
+        PhotoService, ProductService, MenuService, ConfigService, [SMH_API.Client]
     ],
     bootstrap: [AppComponent]
 })

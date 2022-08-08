@@ -1,0 +1,29 @@
+<div class="ml-5">
+    <p-toast position="top-right"></p-toast>
+    <h5 class="mt-5">Sticker</h5>
+    <div class="field grid">
+        <label class="col-12 mb-2 md:col-2 md:mb-0">Sender Phone Number ID *</label>
+        <div class="col-12 md:col-10">
+            <input pInputText [(ngModel)]="phoneNbId" type="text" style="width: 70%"/>
+        </div>
+    </div>
+    <div class="field grid">
+        <label class="col-12 mb-2 md:col-2 md:mb-0">Recepient Number *</label>
+        <div class="col-12 md:col-10">
+            <input pInputText [(ngModel)]="recepientNb" type="text" style="width: 70%"/>
+        </div>
+    </div>
+    <div class="field grid">
+        <label class="col-12 mb-2 md:col-2 md:mb-0">Image Format</label>
+        <div class="col-12 md:col-10">
+            <p-selectButton [options]="locations" [(ngModel)]="stickerLocation" optionLabel="label"></p-selectButton>
+        </div>
+    </div>
+    <div class="field grid mt-2">
+        <label class="col-12 mb-2 md:col-2 md:mb-0">{{ stickerLocation.location === "internet" ? "Sticker Url *" : "Sticker Path *" }}</label>
+        <div class="col-12 md:col-10">
+            <input pInputText [(ngModel)]="stickerPath" type="text" style="width: 70%"/>
+        </div>
+    </div>
+    <button pButton type="button" label="Post" style="margin-top: 5rem; width: auto; margin-bottom: 1rem;" (click)="onPostClick()"></button>
+</div>

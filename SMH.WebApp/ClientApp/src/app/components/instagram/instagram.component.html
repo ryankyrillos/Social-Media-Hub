@@ -1,6 +1,23 @@
-
-<div class="surface-card p-4 shadow-2 border-round">
-    <div class="text-3xl font-medium text-900 mb-3">Instagram</div>
-    <div class="font-medium text-500 mb-3">Vivamus id nisl interdum, blandit augue sit amet, eleifend mi.</div>
-    <div style="height: 150px" class="border-2 border-dashed surface-border"></div>
+<div class="card p-4 shadow-2" style="height: auto">
+    <div class="grid">
+        <div class="col-12 mb-2 lg:col-10 lg:mb-0">
+            <div class="inline text-3xl font-medium text-900 mb-3">Instagram</div>
+        </div>
+        <div class="col-12 mb-2 lg:col-2 lg:mb-0">
+            <div *ngIf="isLoggedIn; else elseLoginBlock">
+                <button pButton type="button" label="Logout from Facebook" class="inline ml-auto" (click)="onLogoutClick()"></button>
+            </div>
+            <ng-template #elseLoginBlock>
+                <button pButton type="button" label="Login to Facebook" class="inline ml-auto" (click)="onLoginClick()"></button>
+            </ng-template>
+        </div>
+    </div>
+    <div *ngIf="isLoggedIn; else elseBlock">
+        <div class="font-medium text-500 mb-3">Choose between posting image or video to Instagram with SMH!</div>
+        <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
+        <router-outlet></router-outlet>
+    </div>
+    <ng-template #elseBlock>
+        <div class="font-medium text-500 mb-3">You must be logged in to post to Instagram!</div>
+    </ng-template>
 </div>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Tweetinvi;
+using Tweetinvi.Exceptions;
 using Tweetinvi.Models;
 using Tweetinvi.Parameters;
 
@@ -22,7 +23,7 @@ namespace WebAPI_SocialMediaPosts.Controllers
         //Tweetinvi: "Start the authentication process"
         private static IAuthenticationRequest? authenticationRequest;
 
-        [HttpGet("Login")]
+        [HttpGet("Login", Name = "[Controller][Action]")]
 
         public async Task<IActionResult> Get()
         {
@@ -39,25 +40,34 @@ namespace WebAPI_SocialMediaPosts.Controllers
             return Ok();
         }
 
-        [HttpPost("Tokens")]
+        [HttpPost("Tokens", Name = "[Controller][Action]")]
 
         public async Task<IActionResult> GetAccessToken(TwitterPin pin)
         {   
             //Tweetivi: "With this pin code it is now possible to get the credentials back from Twitter"
-            var userCredentials = await appClient.Auth.RequestCredentialsFromVerifierCodeAsync(pin.pin_code, authenticationRequest);
-            TwitterToken token = new TwitterToken();
-            
-            //get access token
-            token.access_token = userCredentials.AccessToken;
-            //get access token secret
-            token.access_token_secret = userCredentials.AccessTokenSecret;
 
-            return Ok(token);
+            try {
+                var userCredentials = await appClient.Auth.RequestCredentialsFromVerifierCodeAsync(pin.pin_code, authenticationRequest);
+                TwitterToken token = new TwitterToken();
+
+                //get access token
+                token.access_token = userCredentials.AccessToken;
+                //get access token secret
+                token.access_token_secret = userCredentials.AccessTokenSecret;
+                return Ok(token);
+            }
+            catch
+            {
+                ErrorMessage err = new ErrorMessage();
+                err.error = "Authentication error";
+                return Ok(err);
+            }
+            
         }
 
-        [HttpPost]
+        [HttpPost(Name = "[Controller][Action]")]
 
-        public async Task<IActionResult> Post(Twitter twitter)
+        public async Task<ActionResult<string>> Post(Twitter twitter)
         {
             string API_key = config.GetValue<string>("Twitter:Twitter_API_KEY");
             string API_key_secret = config.GetValue<string>("Twitter:Twitter_API_KEY_SECRET");
@@ -69,39 +79,86 @@ namespace WebAPI_SocialMediaPosts.Controllers
             if (type == "text")
             {
                 string? text = twitter.text;
-                var tweet = await userClient.Tweets.PublishTweetAsync(text); //for text-based tweet
-                return Ok();
+                try
+                {
+                    var tweet = await userClient.Tweets.PublishTweetAsync(text); //for text-based tweet
+                    return Ok();
+                }
+                catch(TwitterException e)
+                {
+                    ErrorMessage err = new ErrorMessage();
+                    err.error = e.Message;
+                    return Ok(err);
+                }
+                
             }
             else if (type == "video")
             {
                 string? text = twitter.text;
                 string? videoPath = twitter.media_path;
 
-                var videoBinary = System.IO.File.ReadAllBytes(videoPath);
-                var uploadedVideo = await userClient.Upload.UploadTweetVideoAsync(videoBinary);
-
-                //Tweetinvi: "IMPORTANT: you need to wait for Twitter to process the video"
-                await userClient.Upload.WaitForMediaProcessingToGetAllMetadataAsync(uploadedVideo);
-
-                var tweetWithVideo = await userClient.Tweets.PublishTweetAsync(new PublishTweetParameters(text)
+                if (!System.IO.File.Exists(videoPath))
                 {
-                    Medias = { uploadedVideo }
-                });
-                return Ok();
+                    ErrorMessage fileError = new ErrorMessage();
+                    fileError.error = "File doesn't exist on local machine";
+                    fileError.code = "1";
+                    return Ok(fileError);
+                }
+
+                var videoBinary = System.IO.File.ReadAllBytes(videoPath);
+
+                try
+                {
+                    var uploadedVideo = await userClient.Upload.UploadTweetVideoAsync(videoBinary);
+
+                    //Tweetinvi: "IMPORTANT: you need to wait for Twitter to process the video"
+                    await userClient.Upload.WaitForMediaProcessingToGetAllMetadataAsync(uploadedVideo);
+
+                    var tweetWithVideo = await userClient.Tweets.PublishTweetAsync(new PublishTweetParameters(text)
+                    {
+                        Medias = { uploadedVideo }
+                    });
+                    return Ok();
+                }
+                catch (TwitterException e)
+                {
+                    ErrorMessage err = new ErrorMessage();
+                    err.error = e.Message;
+                    return Ok(err);
+                }
+
             }
             else if (type == "image")
             {
                 string? text = twitter.text;
                 string? picturePath = twitter.media_path;
-                
-                var pictureBinary = System.IO.File.ReadAllBytes(picturePath);
-                var uploadedPicture = await userClient.Upload.UploadTweetImageAsync(pictureBinary);
 
-                var tweetWithPicture = await userClient.Tweets.PublishTweetAsync(new PublishTweetParameters(text)
+                if (!System.IO.File.Exists(picturePath))
                 {
-                    Medias = { uploadedPicture }
-                });
-                return Ok();
+                    ErrorMessage fileError = new ErrorMessage();
+                    fileError.error = "File doesn't exist on local machine";
+                    fileError.code = "1";
+                    return Ok(fileError);
+                }
+
+                var pictureBinary = System.IO.File.ReadAllBytes(picturePath);
+
+                try
+                {
+                  var uploadedPicture = await userClient.Upload.UploadTweetImageAsync(pictureBinary);
+
+                    var tweetWithPicture = await userClient.Tweets.PublishTweetAsync(new PublishTweetParameters(text)
+                    {
+                        Medias = { uploadedPicture }
+                    });
+                    return Ok();
+                }
+                catch (TwitterException e)
+                {
+                    ErrorMessage err = new ErrorMessage();
+                    err.error = e.Message;
+                    return Ok(err);
+                }
             }
             else
             {

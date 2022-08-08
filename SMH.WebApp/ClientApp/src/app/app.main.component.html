@@ -1,4 +1,5 @@
-<div class="layout-wrapper" [ngClass]="{'layout-overlay':isOverlay(),
+<div class="layout-wrapper"
+    [ngClass]="{'layout-overlay':isOverlay(),
                                 'layout-static':isStatic(),
                                 'layout-theme-light':!config.dark,
                                 'layout-theme-dark':config.dark,
@@ -16,6 +17,5 @@
         </div>
         <app-footer></app-footer>
     </div>
-        <app-config></app-config>
-        <div *ngIf="menuActiveMobile" class="layout-mask p-component-overlay"></div>
+    <div *ngIf="menuActiveMobile" class="layout-mask p-component-overlay"></div>
 </div>

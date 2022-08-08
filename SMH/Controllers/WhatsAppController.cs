@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Text;
+using System.IO;
 using SMH.Models;
 
 namespace WebAPI_SocialMediaPosts.Controllers
@@ -17,7 +18,6 @@ namespace WebAPI_SocialMediaPosts.Controllers
         {
             config = configuration;
         }
-
         public static async Task<string> getHTTPContent(string url)
         {
             using (var http = new HttpClient())
@@ -29,9 +29,17 @@ namespace WebAPI_SocialMediaPosts.Controllers
             }
         }
 
-        [HttpPost("Login")]
+        [HttpGet("Login", Name = "[Controller][Action]")]
 
-        public async Task<IActionResult> Login(Redirect redirect)
+        public async Task<IActionResult> Login(string code)
+        {
+            string url = "http://localhost:4200/whatsapp?code=" + code;
+            return Redirect(url);
+        }
+
+        [HttpPost("Login", Name = "[Controller][Action]")]
+
+        public async Task<ActionResult<string>> Login(Redirect redirect)
         {
             string app_id = config.GetValue<string>("WhatsApp:WhatsApp_App_ID");
 
@@ -48,23 +56,19 @@ namespace WebAPI_SocialMediaPosts.Controllers
             //let user log in to get authorization code
             string url = "https://www.facebook.com/v14.0/dialog/oauth?client_id=" + app_id + "&redirect_uri=" + redirect.redirect_uri + "/&state=" + state + "&scope=whatsapp_business_management,whatsapp_business_messaging,public_profile";
 
-            Process.Start(new ProcessStartInfo(url)
-            {
-                UseShellExecute = true
-            });
-            return Ok();
+            Url URL = new Url();
+            URL.url = url;
+            return Ok(URL);
         }
 
-        [HttpPost("Token")]
+        [HttpPost("Token", Name = "[Controller][Action]")]
 
-        public async Task<ActionResult<string>> GetToken(WhatsAppAuth wp_auth)
+        public async Task<ActionResult<string>> GetToken(FacebookCodeRedirect wp_auth)
         {
             string app_id = config.GetValue<string>("WhatsApp:WhatsApp_App_ID");
             string app_secret = config.GetValue<string>("WhatsApp:WhatsApp_App_Secret");
 
-            string? final_url = wp_auth.final_url_auth;
-            Uri targetUri = new Uri(final_url);
-            string? code = System.Web.HttpUtility.ParseQueryString(targetUri.Query).Get("code");
+            string? code = wp_auth.code;
 
             //get short-lived user access token
             string url = "https://graph.facebook.com/v14.0/oauth/access_token?client_id=" + app_id + "&redirect_uri=" + wp_auth.redirect_uri + "/&client_secret=" + app_secret + "&code=" + code;
@@ -77,14 +81,14 @@ namespace WebAPI_SocialMediaPosts.Controllers
             content = getHTTPContent(url);
 
             token = JsonConvert.DeserializeObject<FBToken>(content.Result);
-            string? long_access = token.access_token;
+            string? long_access_token = token.access_token;
 
             Token token1 = new Token();
-            token1.token = long_access;
+            token1.token = long_access_token;
             return Ok(token1);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "[Controller][Action]")]
 
         public async Task<ActionResult<string>> SendMessage(WhatsApp wp)
         {
@@ -171,6 +175,13 @@ namespace WebAPI_SocialMediaPosts.Controllers
                         return BadRequest(err);
                     }
                     string? path = wp.media_path;
+                    if(!System.IO.File.Exists(path))
+                    {
+                        ErrorMessage fileError = new ErrorMessage();
+                        fileError.error = "File doesn't exist on local machine";
+                        fileError.code = "1";
+                        return Ok(fileError);
+                    }
                     string[] path_parts = path.Split("\\");
                     string? imageFilename = path_parts[path_parts.Length - 1];
 
@@ -316,6 +327,14 @@ namespace WebAPI_SocialMediaPosts.Controllers
 
                     string? path = wp.media_path;
 
+                    if (!System.IO.File.Exists(path))
+                    {
+                        ErrorMessage fileError = new ErrorMessage();
+                        fileError.error = "File doesn't exist on local machine";
+                        fileError.code = "1";
+                        return Ok(fileError);
+                    }
+
                     //send video from local device
                     string[] path_parts = path.Split("\\");
                     string? videoFilename = path_parts[path_parts.Length - 1];
@@ -413,6 +432,14 @@ namespace WebAPI_SocialMediaPosts.Controllers
                 else if (location == "local")
                 {
                     string? path = wp.media_path;
+
+                    if (!System.IO.File.Exists(path))
+                    {
+                        ErrorMessage fileError = new ErrorMessage();
+                        fileError.error = "File doesn't exist on local machine";
+                        fileError.code = "1";
+                        return Ok(fileError);
+                    }
 
                     //send sticker from local device
                     string[] path_parts = path.Split("\\");

@@ -15,7 +15,6 @@ namespace WebAPI_SocialMediaPosts.Controllers
         {
             config = configuration;
         }
-        
 
         public static async Task<string> getHTTPContent(string url)
         {
@@ -28,9 +27,9 @@ namespace WebAPI_SocialMediaPosts.Controllers
             }
         }
 
-        [HttpPost("Login")]
+        [HttpPost("Login", Name = "[Controller][Action]")]
 
-        public async Task<IActionResult> Login(Redirect redirect)
+        public async Task<ActionResult<string>> Login(Redirect redirect)
         {
             string app_id = config.GetValue<string>("Facebook:Facebook_AppId");
 
@@ -47,28 +46,24 @@ namespace WebAPI_SocialMediaPosts.Controllers
             //let user log in to get authorization code
             string url = "https://www.facebook.com/v14.0/dialog/oauth?client_id=" + app_id + "&redirect_uri=" + redirect.redirect_uri + "/&state=" + state + "&scope=pages_show_list,pages_read_engagement,pages_manage_posts,public_profile,instagram_basic,instagram_content_publish";
 
-            Process.Start(new ProcessStartInfo(url)
-            {
-                UseShellExecute = true
-            });
-            return Ok();
+            Url URL = new Url();
+            URL.url = url;
+            return Ok(URL);
         }
 
 
-        [HttpPost("Page_Token")]
+        [HttpPost("Access_Token", Name = "[Controller][Action]")]
 
-        public async Task<ActionResult<string>> GetPageToken(InstagramAuth ig_auth)
+        public async Task<ActionResult<string>> GetAccessToken(FacebookCodeRedirect fbCodeRedirect)
         {
             string app_id = config.GetValue<string>("Facebook:Facebook_AppId");
             string app_secret = config.GetValue<string>("Facebook:Facebook_AppSecret");
 
-            string? final_url = ig_auth.final_url_auth;
-            Uri targetUri = new Uri(final_url);
-            string? code = System.Web.HttpUtility.ParseQueryString(targetUri.Query).Get("code");
-
+            string? code = fbCodeRedirect.code;
             //get short-lived user access token
-            string url = "https://graph.facebook.com/v14.0/oauth/access_token?client_id=" + app_id + "&redirect_uri=" + ig_auth.redirect_uri + "/&client_secret=" + app_secret + "&code=" + code;
+            string url = "https://graph.facebook.com/v14.0/oauth/access_token?client_id=" + app_id + "&redirect_uri=" + fbCodeRedirect.redirect_uri + "/&client_secret=" + app_secret + "&code=" + code;
             var content = getHTTPContent(url);
+            
             FBToken? token = JsonConvert.DeserializeObject<FBToken>(content.Result);
             string? access = token.access_token;
 
@@ -77,20 +72,29 @@ namespace WebAPI_SocialMediaPosts.Controllers
             content = getHTTPContent(url);
 
             token = JsonConvert.DeserializeObject<FBToken>(content.Result);
-            string? long_access = token.access_token;
-
-            string? pageID = ig_auth.facebook_page_id;
-            //get page access token
-            url = "https://graph.facebook.com/" + pageID + "?fields=access_token&access_token=" + long_access;
-            content = getHTTPContent(url);
-            FBPageToken? page_token = JsonConvert.DeserializeObject<FBPageToken>(content.Result);
-            string? page_access = page_token.access_token;
+            string? long_access_token = token.access_token;
+            
             Token token1 = new Token();
-            token1.token = page_access;
+            token1.token = long_access_token;
             return Ok(token1);
         }
 
-        [HttpPost]
+        [HttpPost("Page_Token", Name = "[Controller][Action]")]
+
+        public async Task<ActionResult<string>> GetPageToken(InstagramAuth igAuth)
+        {
+            string? pageID = igAuth.facebook_page_id;
+            //get page access token
+            var url = "https://graph.facebook.com/" + pageID + "?fields=access_token&access_token=" + igAuth.long_access_token;
+            var content = getHTTPContent(url);
+            FBPageToken? page_token = JsonConvert.DeserializeObject<FBPageToken>(content.Result);
+            string? page_access = page_token.access_token;
+            Token token = new Token();
+            token.token = page_access;
+            return Ok(token);
+        }
+
+        [HttpPost(Name = "[Controller][Action]")]
         public async Task<ActionResult<string>> Post(Instagram ig)
         {
             string? pageID = ig.facebook_page_id;

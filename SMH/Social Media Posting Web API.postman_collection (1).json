@@ -38,13 +38,41 @@
 					"response": []
 				},
 				{
+					"name": "Get Access Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"redirect_uri\" : \"{{Redirect_Uri}}\",\r\n    \"code\" : \"USE THE CODE YOU GET\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook/Access_Token",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook",
+								"Access_Token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Page Token",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"final_url_auth\" : \"https://localhost:4321/?code=AQDQdYS5ii3aERx0HWhdfW8hTWFXs81rrlQJOYFR6PhmHRAnZA0IMvBe-0Xw4V6p2jR-FeQDvrUXFI8eBsBESxhvFqp3fhvEamluK3W8fekvtVwNSzKSovccDz7_4luar9dfLhy55OfpBlBg6aEctfu5deht3CzDzwHuj5vR5VVcIwMrC7JPbsGC3p0p3C2fSEg3n70Y3VLqS5VolJMxoMDmarZOkE8jutXjYLtLNxIgRzI9Z6wb35xKMtVqhXMQmwazrOaWMmGWpDDmWWtiUh7RY_1ALR3r77GM9Lp42_xHDFfvF86Ry9CLSq4fhJGNQ-CE7EuLmQYXM7_1hV9EAo7gR9neeYrbZu0R4_0w86na2vMmg8e9WUSV4pFVFUUOuobOYyPIPXZ4rq4lP2kb9xON&state=ilqs4ol8e0269jsu#_=_\",\r\n    \"page_id\" : \"{{Facebook_Page_ID}}\",\r\n    \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
+							"raw": "{\r\n    \"page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"long_access_token\": \"string\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -342,13 +370,41 @@
 					"response": []
 				},
 				{
+					"name": "Get Facebook Access Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"redirect_uri\" : \"{{Redirect_Uri}}\",\r\n    \"code\" : \"USE THE CODE YOU GET\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Instagram/Access_Token",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Instagram",
+								"Access_Token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Facebook Page Token",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"final_url_auth\" : \"https://localhost:4321/?code=AQDiCT3okhCF3hy3ivNub1_tPm8PLCTh_snkGYEQFy9b3C-2W85DbRdbHLrx53mbcZ0ifbIkgm861WzxRRiR_HC83ZAPRnOi9ZYT9DMKz6VZhSV2iWewElx_ilgfHTThEvns2qJGbWE5mRRfNjiEDX2zSfy0P6B6QulL1D-J0h_pqZrtayd8PwPTrQGKmd3dQ7_0Sdn7nOmcfkMBTIdK-UUt-zb_MmtV7SND429OGYg857GtfWq-J0uCmbwMRmCQqCRp5EOnQUGC9djW44LBrnrGNmvtELrGF2Q0MP7pt9pRxg3MKqoeEuJXNi9OMmU3n65J2Yt7I9WkmrQYZY264Vx5aqxMr-RXqud2djCuvd3LqEpJW5lYTLgf6L80hD2TMos&state=rbhoquhyu5wroh30#_=_\",\r\n    \"facebook_page_id\" : \"{{Facebook_Page_ID}}\",\r\n    \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
+							"raw": "{\r\n    \"facebook_page_id\": \"{{facebook_page_id}}\",\r\n    \"long_access_token\": \"string\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -430,7 +486,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"facebook_page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Instagram_Page_Token}}\",\r\n    \"media_type\": \"video\",\r\n    \"caption\": \"hello world #hi\",\r\n    \"media_url\": \"https://cdn.videvo.net/videvo_files/video/free/2014-06/large_watermarked/Blue_Sky_and_Clouds_Timelapse_0892__Videvo_preview.mp4\"\r\n}",
+							"raw": "{\r\n    \"facebook_page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Instagram_Page_Token}}\",\r\n    \"media_type\": \"video\",\r\n    \"caption\": \"hello world #hi\",\r\n    \"media_url\": \"https://assets.mixkit.co/videos/preview/mixkit-stunning-sunset-seen-from-the-sea-4119-large.mp4\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -457,7 +513,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"facebook_page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Instagram_Page_Token}}\",\r\n    \"media_type\": \"video\",\r\n    \"caption\": \"\",\r\n    \"media_url\": \"https://cdn.videvo.net/videvo_files/video/free/2014-06/large_watermarked/Blue_Sky_and_Clouds_Timelapse_0892__Videvo_preview.mp4\"\r\n}",
+							"raw": "{\r\n    \"facebook_page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Instagram_Page_Token}}\",\r\n    \"media_type\": \"video\",\r\n    \"caption\": \"\",\r\n    \"media_url\": \"https://assets.mixkit.co/videos/preview/mixkit-stunning-sunset-seen-from-the-sea-4119-large.mp4\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -517,7 +573,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"final_url_auth\": \"https://localhost:4321/?code=AQAZEkMDWDevEMbBsHGWM5PYZtSWfutowi2ezkA28uUzAzUAC0zNbYBBumEd6y81Wtw0DZHJcp9DLktHNkbd73xTSpldRrz8jvqaUzgrGmlb3_Ed0dppsEdo3Pjsal_xt_8xNss7D0Pud9IXGBE7DThBF6C0nYuxvkMqu17K0y3WgUmkrnOX4kY_eqX47RgfgfLIdbFYFu6AVZfAjigJjERNLkxYorSmc_54WycZFsrUwoYK-zCSm-V4jmajofyjE7TH8QOxCIkMN0xev8dneNoN_lQ4vcHlUZMp88moXXbvSRrfApY9zhA2pplJapyre2VF6bfFRL8OXmFPvPda3ffFsCUoRe052CVZNEK8bRsgpPrH_70miGIJipptrRA3W6leZyp9kjA4vIp7pmg5jy9i&state=gkn4z163bst1o3cc#_=_\",\r\n  \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
+							"raw": "{\r\n  \"redirect_uri\": \"{{Redirect_Uri}}\",\r\n  \"code\": \"USE THE CODE YOU GET\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1152,149 +1208,6 @@
 							],
 							"path": [
 								"Twitter"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "TikTok",
-			"item": [
-				{
-					"name": "Login to get authorization code in the final redirect url",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{baseUrl}}/TikTok/Login",
-							"protocol": "https",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"TikTok",
-								"Login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get access token, refresh token and open id",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"final_url_auth\": \"https://api-university.com/?code=VXNwQqoJBGqqA64s0seRtHuulVQEZGbDxO2HEkUkvXbNiESX5bCZRZbxlSmw1ndMs3iFmdePws2fSAopHXP7j6YtL9zQVXIh4ww8fzQb2gU%2A0%215530&scopes=user.info.basic%2Cvideo.list%2Cvideo.upload&state=ann4cfvvj31qpkcc\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{baseUrl}}/TikTok/Tokens",
-							"protocol": "https",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"TikTok",
-								"Tokens"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Refresh access token using the refresh token",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"refresh_token\": \"{{TikTok_Refresh_Token}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{baseUrl}}/TikTok/Refresh_Access_Token",
-							"protocol": "https",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"TikTok",
-								"Refresh_Access_Token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Make an mp4 video ready for TikTok user to edit and post",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"access_token\": \"{{TikTok_Access_Token}}\",\r\n  \"video_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Documents\\\\Zoom\\\\2022-06-14 15.43.21 Omar Majzoub's Zoom Meeting\\\\video1128812285.mp4\",\r\n  \"open_id\": \"{{TikTok_Open_ID}}\",\r\n  \"video_format\": \"mp4\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{baseUrl}}/TikTok",
-							"protocol": "https",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"TikTok"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Make a webm video ready for TikTok user to edit and post",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"access_token\": \"{{TikTok_Access_Token}}\",\r\n  \"video_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Videos\\\\big-buck-bunny_trailer.webm\",\r\n  \"open_id\": \"{{TikTok_Open_ID}}\",\r\n  \"video_format\": \"webm\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{baseUrl}}/TikTok",
-							"protocol": "https",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"TikTok"
 							]
 						}
 					},
