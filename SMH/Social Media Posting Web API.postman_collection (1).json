@@ -1,0 +1,1338 @@
+{
+	"info": {
+		"_postman_id": "297e2a76-f231-4b0e-a63f-dd1f269c44bc",
+		"name": "Social Media Posting Web API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21744481"
+	},
+	"item": [
+		{
+			"name": "Facebook",
+			"item": [
+				{
+					"name": "Login to get authorization code in the final redirect url",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook/Login",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Page Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"final_url_auth\" : \"https://localhost:4321/?code=AQDQdYS5ii3aERx0HWhdfW8hTWFXs81rrlQJOYFR6PhmHRAnZA0IMvBe-0Xw4V6p2jR-FeQDvrUXFI8eBsBESxhvFqp3fhvEamluK3W8fekvtVwNSzKSovccDz7_4luar9dfLhy55OfpBlBg6aEctfu5deht3CzDzwHuj5vR5VVcIwMrC7JPbsGC3p0p3C2fSEg3n70Y3VLqS5VolJMxoMDmarZOkE8jutXjYLtLNxIgRzI9Z6wb35xKMtVqhXMQmwazrOaWMmGWpDDmWWtiUh7RY_1ALR3r77GM9Lp42_xHDFfvF86Ry9CLSq4fhJGNQ-CE7EuLmQYXM7_1hV9EAo7gR9neeYrbZu0R4_0w86na2vMmg8e9WUSV4pFVFUUOuobOYyPIPXZ4rq4lP2kb9xON&state=ilqs4ol8e0269jsu#_=_\",\r\n    \"page_id\" : \"{{Facebook_Page_ID}}\",\r\n    \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook/Page_Token",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook",
+								"Page_Token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a post with text only",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Facebook_Page_Token}}\",\r\n    \"media_type\": \"text\",\r\n    \"text\": \"hello world\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload an image with text from local device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Facebook_Page_Token}}\",\r\n    \"media_type\": \"image\",\r\n    \"text\": \"hello world\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Downloads\\\\Share Posts.png\",\r\n    \"media_location\": \"local\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload an image without text from local device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Facebook_Page_Token}}\",\r\n    \"media_type\": \"image\",\r\n    \"text\": \"\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Downloads\\\\Share Posts.png\",\r\n    \"media_location\": \"local\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload an image with text from the internet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Facebook_Page_Token}}\",\r\n    \"media_type\": \"image\",\r\n    \"text\": \"hello world\",\r\n    \"media_path\": \"https://live.staticflickr.com/5553/14355723635_382c5e4685_b.jpg\",\r\n    \"media_location\": \"internet\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload an image without text from the internet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Facebook_Page_Token}}\",\r\n    \"media_type\": \"image\",\r\n    \"text\": \"\",\r\n    \"media_path\": \"https://live.staticflickr.com/5553/14355723635_382c5e4685_b.jpg\",\r\n    \"media_location\": \"internet\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload a video with text from local device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Facebook_Page_Token}}\",\r\n    \"media_type\": \"video\",\r\n    \"text\": \"hello world\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Documents\\\\Zoom\\\\2022-06-14 15.43.21 Omar Majzoub's Zoom Meeting\\\\video1128812285.mp4\",\r\n    \"media_location\": \"local\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload a video without text from local device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Facebook_Page_Token}}\",\r\n    \"media_type\": \"video\",\r\n    \"text\": \"\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Documents\\\\Zoom\\\\2022-06-14 15.43.21 Omar Majzoub's Zoom Meeting\\\\video1128812285.mp4\",\r\n    \"media_location\": \"local\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload a video with text from the internet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Facebook_Page_Token}}\",\r\n    \"media_type\": \"video\",\r\n    \"text\": \"hello world\",\r\n    \"media_path\": \"https://cdn.videvo.net/videvo_files/video/free/2014-06/large_watermarked/Blue_Sky_and_Clouds_Timelapse_0892__Videvo_preview.mp4\",\r\n    \"media_location\": \"internet\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload a video without text from the internet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Facebook_Page_Token}}\",\r\n    \"media_type\": \"video\",\r\n    \"text\": \"\",\r\n    \"media_path\": \"https://cdn.videvo.net/videvo_files/video/free/2014-06/large_watermarked/Blue_Sky_and_Clouds_Timelapse_0892__Videvo_preview.mp4\",\r\n    \"media_location\": \"internet\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Facebook",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Facebook"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Instagram",
+			"item": [
+				{
+					"name": "Login to get authorization code in the final redirect url",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Instagram/Login",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Instagram",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Facebook Page Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"final_url_auth\" : \"https://localhost:4321/?code=AQDiCT3okhCF3hy3ivNub1_tPm8PLCTh_snkGYEQFy9b3C-2W85DbRdbHLrx53mbcZ0ifbIkgm861WzxRRiR_HC83ZAPRnOi9ZYT9DMKz6VZhSV2iWewElx_ilgfHTThEvns2qJGbWE5mRRfNjiEDX2zSfy0P6B6QulL1D-J0h_pqZrtayd8PwPTrQGKmd3dQ7_0Sdn7nOmcfkMBTIdK-UUt-zb_MmtV7SND429OGYg857GtfWq-J0uCmbwMRmCQqCRp5EOnQUGC9djW44LBrnrGNmvtELrGF2Q0MP7pt9pRxg3MKqoeEuJXNi9OMmU3n65J2Yt7I9WkmrQYZY264Vx5aqxMr-RXqud2djCuvd3LqEpJW5lYTLgf6L80hD2TMos&state=rbhoquhyu5wroh30#_=_\",\r\n    \"facebook_page_id\" : \"{{Facebook_Page_ID}}\",\r\n    \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Instagram/Page_Token",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Instagram",
+								"Page_Token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload an image from the internet with caption",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"facebook_page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Instagram_Page_Token}}\",\r\n    \"media_type\": \"image\",\r\n    \"caption\": \"hello world #hi\",\r\n    \"media_url\": \"https://live.staticflickr.com/5553/14355723635_382c5e4685_b.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Instagram",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Instagram"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload an image from the internet without caption",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"facebook_page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Instagram_Page_Token}}\",\r\n    \"media_type\": \"image\",\r\n    \"caption\": \"\",\r\n    \"media_url\": \"https://live.staticflickr.com/5553/14355723635_382c5e4685_b.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Instagram",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Instagram"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload a video from the internet with caption",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"facebook_page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Instagram_Page_Token}}\",\r\n    \"media_type\": \"video\",\r\n    \"caption\": \"hello world #hi\",\r\n    \"media_url\": \"https://cdn.videvo.net/videvo_files/video/free/2014-06/large_watermarked/Blue_Sky_and_Clouds_Timelapse_0892__Videvo_preview.mp4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Instagram",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Instagram"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload a video from the internet without caption",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"facebook_page_id\": \"{{Facebook_Page_ID}}\",\r\n    \"page_token\": \"{{Instagram_Page_Token}}\",\r\n    \"media_type\": \"video\",\r\n    \"caption\": \"\",\r\n    \"media_url\": \"https://cdn.videvo.net/videvo_files/video/free/2014-06/large_watermarked/Blue_Sky_and_Clouds_Timelapse_0892__Videvo_preview.mp4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Instagram",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Instagram"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WhatsApp",
+			"item": [
+				{
+					"name": "Login with Facebook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp/Login",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get long-lived access token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"final_url_auth\": \"https://localhost:4321/?code=AQAZEkMDWDevEMbBsHGWM5PYZtSWfutowi2ezkA28uUzAzUAC0zNbYBBumEd6y81Wtw0DZHJcp9DLktHNkbd73xTSpldRrz8jvqaUzgrGmlb3_Ed0dppsEdo3Pjsal_xt_8xNss7D0Pud9IXGBE7DThBF6C0nYuxvkMqu17K0y3WgUmkrnOX4kY_eqX47RgfgfLIdbFYFu6AVZfAjigJjERNLkxYorSmc_54WycZFsrUwoYK-zCSm-V4jmajofyjE7TH8QOxCIkMN0xev8dneNoN_lQ4vcHlUZMp88moXXbvSRrfApY9zhA2pplJapyre2VF6bfFRL8OXmFPvPda3ffFsCUoRe052CVZNEK8bRsgpPrH_70miGIJipptrRA3W6leZyp9kjA4vIp7pmg5jy9i&state=gkn4z163bst1o3cc#_=_\",\r\n  \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp/Token",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp",
+								"Token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a message template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"template\",\r\n    \"template_name\": \"hello_world\",\r\n    \"template_language_code\": \"en_US\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a text message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"text\",\r\n    \"text\": \"Hi customer\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a png image from local device with text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"image\",\r\n    \"text\": \"Hi customer\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Downloads\\\\Share Posts.png\",\r\n    \"media_location\": \"local\",\r\n    \"media_format\": \"png\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a png image from local device without text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"image\",\r\n    \"text\": \"\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Downloads\\\\Share Posts.png\",\r\n    \"media_location\": \"local\",\r\n    \"media_format\": \"png\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a jpeg image from local device with text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"image\",\r\n    \"text\": \"Hi customer\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Downloads\\\\cat.jpg\",\r\n    \"media_location\": \"local\",\r\n    \"media_format\": \"jpeg\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a jpeg image from local device without text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"image\",\r\n    \"text\": \"\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Downloads\\\\cat.jpg\",\r\n    \"media_location\": \"local\",\r\n    \"media_format\": \"jpeg\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send an image from internet with text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"image\",\r\n    \"text\": \"Hi customer\",\r\n    \"media_path\": \"https://live.staticflickr.com/5553/14355723635_382c5e4685_b.jpg\",\r\n    \"media_location\": \"internet\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send an image from internet without text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"image\",\r\n    \"text\": \"\",\r\n    \"media_path\": \"https://live.staticflickr.com/5553/14355723635_382c5e4685_b.jpg\",\r\n    \"media_location\": \"internet\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send an mp4 video from local device with text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"video\",\r\n    \"text\": \"hello customer\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Documents\\\\Zoom\\\\2022-06-14 15.43.21 Omar Majzoub's Zoom Meeting\\\\video1128812285.mp4\",\r\n    \"media_location\": \"local\",\r\n    \"media_format\": \"mp4\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send an mp4 video from local device without text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"video\",\r\n    \"text\": \"\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Documents\\\\Zoom\\\\2022-06-14 15.43.21 Omar Majzoub's Zoom Meeting\\\\video1128812285.mp4\",\r\n    \"media_location\": \"local\",\r\n    \"media_format\": \"mp4\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a 3gpp video from local device with text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"video\",\r\n    \"text\": \"hello customer\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Videos\\\\video1128812285.3gpp\",\r\n    \"media_location\": \"local\",\r\n    \"media_format\": \"3gpp\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a 3gpp video from local device without text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"video\",\r\n    \"text\": \"\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Videos\\\\video1128812285.3gpp\",\r\n    \"media_location\": \"local\",\r\n    \"media_format\": \"3gpp\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a video from internet with text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"video\",\r\n    \"text\": \"hello customer\",\r\n    \"media_path\": \"https://cdn.videvo.net/videvo_files/video/free/2014-06/large_watermarked/Blue_Sky_and_Clouds_Timelapse_0892__Videvo_preview.mp4\",\r\n    \"media_location\": \"internet\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a video from internet without text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"video\",\r\n    \"text\": \"\",\r\n    \"media_path\": \"https://cdn.videvo.net/videvo_files/video/free/2014-06/large_watermarked/Blue_Sky_and_Clouds_Timelapse_0892__Videvo_preview.mp4\",\r\n    \"media_location\": \"internet\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a webp sticker from internet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"sticker\",\r\n    \"media_path\": \"https://img-06.stickers.cloud/packs/5df297e3-a7f0-44e0-a6d1-43bdb09b793c/webp/26f8a48f-9c22-47a5-a767-fe824884356c.webp\",\r\n    \"media_location\": \"internet\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send a webp sticker from local device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"access_token\": \"{{WhatsApp_Access_Token}}\",\r\n    \"phone_number_id\": \"{{WhatsApp_Phone_Number_ID}}\",\r\n    \"media_type\": \"sticker\",\r\n    \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Downloads\\\\pikachu_sticker.webp\",\r\n    \"media_location\": \"local\",\r\n    \"recepient_number\": \"PHONE NUMBER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/WhatsApp",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"WhatsApp"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Twitter",
+			"item": [
+				{
+					"name": "Login to get pin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{baseUrl}}/Twitter/Login",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Twitter",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get access token and access token secret in exchange for pin code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"pin_code\": \"ENTER THE PIN YOU GET\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Twitter/Tokens",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Twitter",
+								"Tokens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post text-only tweet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"access_token\": \"{{Twitter_Access_Token}}\",\r\n  \"access_token_secret\": \"{{Twitter_Access_Token_Secret}}\",\r\n  \"media_type\": \"text\",\r\n  \"text\": \"hello world\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Twitter",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Twitter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post tweet with an image from local device and text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"access_token\": \"{{Twitter_Access_Token}}\",\r\n  \"access_token_secret\": \"{{Twitter_Access_Token_Secret}}\",\r\n  \"media_type\": \"image\",\r\n  \"text\": \"hello world\",\r\n  \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Downloads\\\\Share Posts.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Twitter",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Twitter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post tweet with an image from local device without text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"access_token\": \"{{Twitter_Access_Token}}\",\r\n  \"access_token_secret\": \"{{Twitter_Access_Token_Secret}}\",\r\n  \"media_type\": \"image\",\r\n  \"text\": \"\",\r\n  \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Downloads\\\\Share Posts.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Twitter",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Twitter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post tweet with a video from local device and text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"access_token\": \"{{Twitter_Access_Token}}\",\r\n  \"access_token_secret\": \"{{Twitter_Access_Token_Secret}}\",\r\n  \"media_type\": \"video\",\r\n  \"text\": \"hello world\",\r\n  \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Documents\\\\Zoom\\\\2022-06-14 15.43.21 Omar Majzoub's Zoom Meeting\\\\video1128812285.mp4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Twitter",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Twitter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post tweet with a video from local device without text",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"access_token\": \"{{Twitter_Access_Token}}\",\r\n  \"access_token_secret\": \"{{Twitter_Access_Token_Secret}}\",\r\n  \"media_type\": \"video\",\r\n  \"text\": \"\",\r\n  \"media_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Documents\\\\Zoom\\\\2022-06-14 15.43.21 Omar Majzoub's Zoom Meeting\\\\video1128812285.mp4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/Twitter",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Twitter"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TikTok",
+			"item": [
+				{
+					"name": "Login to get authorization code in the final redirect url",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"redirect_uri\": \"{{Redirect_Uri}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/TikTok/Login",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"TikTok",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get access token, refresh token and open id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"final_url_auth\": \"https://api-university.com/?code=VXNwQqoJBGqqA64s0seRtHuulVQEZGbDxO2HEkUkvXbNiESX5bCZRZbxlSmw1ndMs3iFmdePws2fSAopHXP7j6YtL9zQVXIh4ww8fzQb2gU%2A0%215530&scopes=user.info.basic%2Cvideo.list%2Cvideo.upload&state=ann4cfvvj31qpkcc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/TikTok/Tokens",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"TikTok",
+								"Tokens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh access token using the refresh token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"refresh_token\": \"{{TikTok_Refresh_Token}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/TikTok/Refresh_Access_Token",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"TikTok",
+								"Refresh_Access_Token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make an mp4 video ready for TikTok user to edit and post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"access_token\": \"{{TikTok_Access_Token}}\",\r\n  \"video_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Documents\\\\Zoom\\\\2022-06-14 15.43.21 Omar Majzoub's Zoom Meeting\\\\video1128812285.mp4\",\r\n  \"open_id\": \"{{TikTok_Open_ID}}\",\r\n  \"video_format\": \"mp4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/TikTok",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"TikTok"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make a webm video ready for TikTok user to edit and post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"access_token\": \"{{TikTok_Access_Token}}\",\r\n  \"video_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Videos\\\\big-buck-bunny_trailer.webm\",\r\n  \"open_id\": \"{{TikTok_Open_ID}}\",\r\n  \"video_format\": \"webm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/TikTok",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"TikTok"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "YouTube",
+			"item": [
+				{
+					"name": "Post a video",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"video_path\": \"C:\\\\Users\\\\Omar Majzoub\\\\Documents\\\\Zoom\\\\2022-06-14 15.43.21 Omar Majzoub's Zoom Meeting\\\\video1128812285.mp4\",\r\n  \"title\": \"hello world\",\r\n  \"description\": \"Hello World!!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{baseUrl}}/YouTube",
+							"protocol": "https",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"YouTube"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
